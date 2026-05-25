@@ -1,37 +1,59 @@
 import { buildRoute, ROUTES, SYMBOL_MAP, type ChainKey } from "@/constants";
+import type {
+  BalanceResponse,
+  TokensResponse,
+  TransactionsResponse,
+} from "@/types";
+
+async function fetchJson<T>(input: RequestInfo): Promise<T> {
+  const res = await fetch(input);
+
+  const data = await res.json().catch(() => null);
+
+  if (!res.ok) {
+    throw new Error(data?.message || "Request failed");
+  }
+
+  return data as T;
+}
 
 export const api = {
   getBalance: (address: string, chain = "ethereum") =>
-    fetch(buildRoute(ROUTES.API.GET_BALANCE, { address }, { chain })).then(
-      (r) => r.json(),
+    fetchJson<BalanceResponse>(
+      buildRoute(ROUTES.API.GET_BALANCE, { address }, { chain }),
     ),
 
-  getTransactions: (address: string, chain = "ethereum", pageKey?: string) =>
-    fetch(
+  getTransactions: (
+    address: string,
+    chain = "ethereum",
+    pageKey: string | null,
+  ) =>
+    fetchJson<TransactionsResponse>(
       buildRoute(
         ROUTES.API.GET_TRANSACTIONS,
         { address },
         { chain, ...(pageKey && { pageKey }) },
       ),
-    ).then((r) => r.json()),
+    ),
 
   getTokens: (address: string, chain = "ethereum") =>
-    fetch(buildRoute(ROUTES.API.GET_TOKENS, { address }, { chain })).then((r) =>
-      r.json(),
+    fetchJson<TokensResponse>(
+      buildRoute(ROUTES.API.GET_TOKENS, { address }, { chain }),
     ),
 
   getPrice: async (chain: ChainKey): Promise<number> => {
     const res = await fetch(
       `https://api.binance.com/api/v3/ticker/price?symbol=${SYMBOL_MAP[chain]}`,
     );
-    if (!res.ok) throw new Error(`Failed to fetch price for ${chain}`);
-    const data = await res.json();
+
+    const data = await res.json().catch(() => null);
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch price for ${chain}`);
+    }
+
     return parseFloat(data.price);
   },
 
-  getHealth: () =>
-    fetch(ROUTES.API.HEALTH).then((r) => {
-      if (!r.ok) throw new Error("API is not healthy");
-      return r.json();
-    }),
+  getHealth: () => fetchJson<number>(ROUTES.API.HEALTH),
 };

@@ -13,18 +13,20 @@ export const useBalance = (address: string, chain?: string) =>
     queryFn: () => api.getBalance(address, chain),
     enabled: !!address,
     staleTime: Infinity,
+    retry: false,
   });
 
 export const useTransactions = (
   address: string,
   chain?: string,
-  pageKey?: string,
+  pageKey: string | null = null,
 ) =>
   useQuery<TransactionsResponse>({
     queryKey: ["transactions", address, chain, pageKey],
     queryFn: () => api.getTransactions(address, chain, pageKey),
     enabled: !!address,
     staleTime: Infinity,
+    retry: false,
   });
 
 export const useTokens = (address: string, chain?: string) =>
@@ -33,6 +35,7 @@ export const useTokens = (address: string, chain?: string) =>
     queryFn: () => api.getTokens(address, chain),
     enabled: !!address,
     staleTime: Infinity,
+    retry: false,
   });
 
 export const usePrice = (chain: ChainKey) =>

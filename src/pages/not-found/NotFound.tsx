@@ -1,17 +1,32 @@
 import { Link } from "react-router-dom";
 import { ROUTES } from "@/constants";
 
-export const NotFound = () => {
+export const NotFound = ({
+  title,
+  message,
+  fullScreen = true,
+}: {
+  title?: string;
+  message?: string;
+  fullScreen?: boolean;
+}) => {
   return (
-    <div className="fixed w-dvw h-dvh bg-[#090909] flex flex-col items-center  text-center px-6 pt-76">
+    <div
+      className={
+        fullScreen
+          ? "fixed w-dvw h-dvh bg-[#090909] flex flex-col items-center  text-center px-6 pt-76"
+          : "flex flex-col items-center  text-center px-6 pt-76"
+      }
+    >
       <p className="text-3xl font-bold uppercase tracking-widest text-gray-600 mb-4">
         404
       </p>
       <h1 className="text-4xl font-extrabold text-white tracking-tight mb-3">
-        Page not found
+        {title || "Page Not Found"}
       </h1>
       <p className="text-gray-500 text-[14px] max-w-xs leading-relaxed mb-8">
-        The page you are looking for does not exist or has been moved.
+        {message ||
+          "The page you are looking for does not exist or has been moved."}
       </p>
       <Link
         to={ROUTES.HOME}

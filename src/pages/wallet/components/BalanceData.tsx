@@ -7,6 +7,7 @@ export function BalanceData({ chain, address }: BalanceDataProps) {
     data: balanceData,
     isLoading: isBalanceLoading,
     isError: isBalanceError,
+    error: balanceError,
   } = useBalance(address!, chain);
   const {
     data: priceData,
@@ -24,7 +25,7 @@ export function BalanceData({ chain, address }: BalanceDataProps) {
   }
 
   if (isBalanceError) {
-    return <p className="text-red-400 text-sm">Failed to load balance</p>;
+    return <p className="text-red-400 text-sm">{balanceError.message}</p>;
   }
 
   if (!balanceData) return null;
