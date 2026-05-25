@@ -1,3 +1,4 @@
+import { Button } from "@/components";
 import { buildRoute, ROUTES } from "@/constants";
 import { isValidAddr } from "@/utils";
 import { useState } from "react";
@@ -51,12 +52,7 @@ export function SearchSection() {
           }}
           onKeyDown={(e) => e.key === "Enter" && handleSearch()}
         />
-        <button
-          onClick={handleSearch}
-          className="shrink-0 px-5 py-2.5 rounded-lg bg-orange-500 text-black text-[13px] font-bold hover:bg-orange-400 active:scale-95 transition-all disabled:opacity-50"
-        >
-          Look Up
-        </button>
+        <Button onClick={handleSearch}>Look Up</Button>
       </div>
 
       <p className="text-[12px] text-gray-600 mt-2 px-1">

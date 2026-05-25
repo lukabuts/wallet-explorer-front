@@ -46,7 +46,7 @@ export function WalletPanel() {
   const isConnected = addresses.length > 0;
 
   return (
-    <section className="max-w-2xl mx-auto px-6 pb-16">
+    <section className="max-w-2xl mx-auto px-6">
       <div className="flex items-center gap-3 mb-4">
         <p className="text-[10px] font-bold tracking-widest uppercase text-gray-600">
           Your Wallet

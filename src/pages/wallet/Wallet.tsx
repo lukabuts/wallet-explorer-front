@@ -9,6 +9,8 @@ import {
   useParams,
   useLocation,
 } from "react-router-dom";
+import { ethers } from "ethers";
+import { NotFound } from "../not-found";
 
 export const Wallet = () => {
   const navigate = useNavigate();
@@ -21,14 +23,24 @@ export const Wallet = () => {
     if (!address || addresses.length === 0) navigate(ROUTES.HOME);
   }, [address, addresses.length, navigate]);
 
+  if (!ethers.isAddress(address)) {
+    return (
+      <NotFound
+        title="Wallet Not Found"
+        message="Invalid wallet address."
+        fullScreen={false}
+      />
+    );
+  }
+
   const isTransactions = location.pathname.includes("transactions");
 
   if (!address) return null;
 
   return (
-    <div className="min-h-screen bg-[#090909] text-gray-300 px-6 py-10 max-w-2xl mx-auto">
+    <div className="bg-black-secondary text-gray-300 p-6 max-w-2xl mx-auto space-y-4">
       {/* Header */}
-      <div className="flex items-start justify-between mb-8">
+      <div className="flex items-start justify-between max-sm:flex-col gap-2">
         <div>
           <p className="text-[11px] text-gray-600 uppercase tracking-widest mb-1">
             Wallet
@@ -37,11 +49,13 @@ export const Wallet = () => {
             {address}
           </p>
         </div>
-        <ChainSelector value={chain} onChange={setChain} />
+        <div className="self-end">
+          <ChainSelector value={chain} onChange={setChain} />
+        </div>
       </div>
 
       {/* Balance card */}
-      <div className="bg-white/5 border border-white/8 rounded-xl p-5 mb-6">
+      <div className="bg-white/5 border border-white/8 rounded-xl p-5">
         <p className="text-[11px] text-gray-600 uppercase tracking-widest mb-2">
           Balance
         </p>
@@ -49,7 +63,7 @@ export const Wallet = () => {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 border-b border-white/8 mb-6">
+      <div className="flex gap-1 border-b border-white/8">
         {[
           { label: "Tokens", to: buildRoute(ROUTES.WALLET, { address }) },
           {

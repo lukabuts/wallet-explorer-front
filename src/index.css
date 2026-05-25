@@ -2,17 +2,45 @@
 
 :root {
   --color-black-primary: #040404;
+  --color-black-secondary: #090909;
   --color-light-gray: #f2f1f2;
   --color-purple: #95a1f9;
 }
 
 @theme inline {
   --color-black-primary: var(--color-black-primary);
+  --color-black-secondary: var(--color-black-secondary);
   --color-light-gray: var(--color-light-gray);
   --color-purple: var(--color-purple);
 }
 
 @layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #2a2a2a transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+    border-radius: 100px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: #3a3a3a;
+  }
+
+  *::-webkit-scrollbar-corner {
+    background: transparent;
+  }
   body {
     font-family: "Inter", sans-serif;
     background-color: var(--color-black-primary);
@@ -21,5 +49,17 @@
 
   button {
     cursor: pointer;
+  }
+}
+
+@layer components {
+  .max-h-wallet-content {
+    max-height: calc(100dvh - 465px);
+  }
+
+  @media screen and (max-width: 640px) {
+    .max-h-wallet-content {
+      max-height: calc(100dvh - 520px);
+    }
   }
 }

@@ -11,7 +11,7 @@ export const AppLayout = () => {
   return (
     <div className="min-h-dvh">
       <Header />
-      <div className="lg:px-10 px-4 pt-4">
+      <div className="lg:px-10 lg:py-4 px-4 py-5">
         <Outlet />
       </div>
     </div>
