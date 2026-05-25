@@ -6,7 +6,6 @@ import path from "path";
 import dotenv from "dotenv";
 dotenv.config();
 
-const API_URL: string = process.env.VITE_API_URL || "http://localhost:3000";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
@@ -14,14 +13,6 @@ export default defineConfig({
     tailwindcss(),
     babel({ presets: [reactCompilerPreset()] }),
   ],
-  server: {
-    proxy: {
-      "/api": {
-        target: API_URL,
-        changeOrigin: true,
-      },
-    },
-  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
