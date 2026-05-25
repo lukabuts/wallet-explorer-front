@@ -1,18 +1,16 @@
-<<<<<<< Updated upstream
-=======
-const BASE_URL = "http://127.0.0.1:3000";
+const BASE_URL =
+  import.meta.env.VITE_API_URL || "https://wallet-api.lukabuts.site";
 
->>>>>>> Stashed changes
 export const ROUTES = {
   HOME: "/",
   WALLET: "/wallet/:address",
   WALLET_TRANSACTIONS: "/wallet/:address/transactions",
   WALLET_TOKENS: "/wallet/:address/tokens",
   API: {
-    GET_BALANCE: "/api/wallet/:address/balance",
-    GET_TRANSACTIONS: "/api/wallet/:address/transactions",
-    GET_TOKENS: "/api/wallet/:address/tokens",
-    HEALTH: "/api/health",
+    GET_BALANCE: `${BASE_URL}/api/wallet/:address/balance`,
+    GET_TRANSACTIONS: `${BASE_URL}/api/wallet/:address/transactions`,
+    GET_TOKENS: `${BASE_URL}/api/wallet/:address/tokens`,
+    HEALTH: `${BASE_URL}/api/health`,
   },
 } as const;
 
