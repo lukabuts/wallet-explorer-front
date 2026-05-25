@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+:root {
+  --color-black-primary: #040404;
+  --color-light-gray: #f2f1f2;
+  --color-purple: #95a1f9;
+}
+
+@theme inline {
+  --color-black-primary: var(--color-black-primary);
+  --color-light-gray: var(--color-light-gray);
+  --color-purple: var(--color-purple);
+}
+
+@layer base {
+  body {
+    font-family: "Inter", sans-serif;
+    background-color: var(--color-black-primary);
+    color: var(--color-light-gray);
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
