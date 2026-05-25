@@ -7,6 +7,7 @@ export const ROUTES = {
     GET_BALANCE: "/api/wallet/:address/balance",
     GET_TRANSACTIONS: "/api/wallet/:address/transactions",
     GET_TOKENS: "/api/wallet/:address/tokens",
+    HEALTH: "/api/health",
   },
 } as const;
 

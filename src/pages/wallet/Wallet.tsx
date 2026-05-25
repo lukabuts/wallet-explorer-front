@@ -10,7 +10,7 @@ import {
   useLocation,
 } from "react-router-dom";
 
-const Wallet = () => {
+export const Wallet = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { address } = useParams();
@@ -80,5 +80,3 @@ const Wallet = () => {
     </div>
   );
 };
-
-export default Wallet;
