@@ -1,27 +1,14 @@
 import { buildRoute, ROUTES, type ChainKey } from "@/constants";
-import { useAddressStore } from "@/store";
 import { BalanceData, ChainSelector } from "./components";
-import { useEffect, useState } from "react";
-import {
-  Link,
-  Outlet,
-  useNavigate,
-  useParams,
-  useLocation,
-} from "react-router-dom";
+import { useState } from "react";
+import { Link, Outlet, useParams, useLocation } from "react-router-dom";
 import { ethers } from "ethers";
 import { NotFound } from "../not-found";
 
 export const Wallet = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   const { address } = useParams();
-  const { addresses } = useAddressStore();
   const [chain, setChain] = useState<ChainKey>("ethereum");
-
-  useEffect(() => {
-    if (!address || addresses.length === 0) navigate(ROUTES.HOME);
-  }, [address, addresses.length, navigate]);
 
   if (!ethers.isAddress(address)) {
     return (
