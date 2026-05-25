@@ -1,11 +1,19 @@
 import { createBrowserRouter } from "react-router-dom";
 import { ROUTES } from "@/constants";
-import { Home, Tokens, Transactions, Wallet } from "@/pages";
+import {
+  Home,
+  NotFound,
+  ServerError,
+  Tokens,
+  Transactions,
+  Wallet,
+} from "@/pages";
 import { AppLayout } from "@/components";
 
 export const router = createBrowserRouter([
   {
     element: <AppLayout />,
+    errorElement: <ServerError />,
     children: [
       { path: ROUTES.HOME, element: <Home /> },
       {
@@ -14,10 +22,10 @@ export const router = createBrowserRouter([
         children: [
           { path: "", element: <Tokens /> },
           { path: "transactions", element: <Transactions /> },
-          { path: "*", element: <>Not FOund</> },
+          { path: "*", element: <NotFound /> },
         ],
       },
-      { path: "*", element: <>Not FOund</> },
+      { path: "*", element: <NotFound /> },
     ],
   },
 ]);

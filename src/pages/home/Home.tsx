@@ -1,6 +1,6 @@
 import { HeroSection, SearchSection, WalletPanel } from "./components";
 
-const Home = () => {
+export const Home = () => {
   return (
     <div>
       <HeroSection />
@@ -9,5 +9,3 @@ const Home = () => {
     </div>
   );
 };
-
-export default Home;

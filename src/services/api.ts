@@ -28,4 +28,10 @@ export const api = {
     const data = await res.json();
     return parseFloat(data.price);
   },
+
+  getHealth: () =>
+    fetch(ROUTES.API.HEALTH).then((r) => {
+      if (!r.ok) throw new Error("API is not healthy");
+      return r.json();
+    }),
 };
